@@ -36,6 +36,7 @@ function getEventEmote(event) {
   switch (event) {
     case "Halloween": return " **(:jack_o_lantern:)**";
     case "Christmas": return " **(:christmas_tree:)**";
+    case "Maid"     : return " **(:dress:)**";
     default: return "";
   }
 }
@@ -45,8 +46,8 @@ function generateOutput() {
     UR: [],
     SSR: [],
     SR: [],
-    Rare: [],
-    Common: [],
+    R: [],
+    C: [],
   };
 
   cards.forEach(card => {
@@ -56,7 +57,7 @@ function generateOutput() {
   });
 
   let result = `#0\n\n`;
-  for (const rarity of ["UR", "SSR", "SR", "Rare", "Common"]) {
+  for (const rarity of ["UR", "SSR", "SR", "R", "C"]) {
     if (grouped[rarity].length) {
       result += `__**${rarity}:**__\n${grouped[rarity].join("\n")}\n\n`;
     }
