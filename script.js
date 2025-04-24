@@ -5,6 +5,14 @@ const clearBtn = document.getElementById("clearBtn");
 
 let cards = [];
 
+// Mapping Discord-style emote names to emojis
+const emojiMap = {
+  jack_o_lantern: "🎃",
+  christmas_tree: "🎄",
+  dress: "👗",
+  // Add more mappings as needed
+};
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   
@@ -24,7 +32,10 @@ form.addEventListener("submit", (e) => {
 copyBtn.addEventListener("click", () => {
   output.select();
   document.execCommand("copy");
-  alert("Copied to clipboard!");
+
+  // Animate button
+  copyBtn.classList.add("animate-pulse");
+  setTimeout(() => copyBtn.classList.remove("animate-pulse"), 500);
 });
 
 clearBtn.addEventListener("click", () => {
@@ -34,9 +45,9 @@ clearBtn.addEventListener("click", () => {
 
 function getEventEmote(event) {
   switch (event) {
-    case "Halloween": return " **(:jack_o_lantern:)**";
-    case "Christmas": return " **(:christmas_tree:)**";
-    case "Maid"     : return " **(:dress:)**";
+    case "Halloween🎃": return " **(:jack_o_lantern:)**";
+    case "Christmas🎄": return " **(:christmas_tree:)**";
+    case "Maid👗"     : return " **(:dress:)**";
     default: return "";
   }
 }
@@ -64,4 +75,29 @@ function generateOutput() {
   }
 
   output.value = result.trim();
+
+    // Glow effect on output
+    output.classList.add("ring", "ring-green-400");
+    setTimeout(() => output.classList.remove("ring", "ring-green-400"), 500);
+
+  // Update Live Preview
+  updatePreview(output.value);
+
+}
+
+function updatePreview(text) {
+  const preview = document.getElementById("preview");
+
+  // Replace (:emote:) with actual emojis in preview only
+  let formatted = text.replace(/\(:([a-zA-Z0-9_]+):\)/g, (match, name) => {
+    return emojiMap[name] || match;
+  });
+
+  formatted = formatted
+    .replace(/^__(.*?)__$/gm, '<u>$1</u>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-blue-400 underline" target="_blank">$1</a>')
+    .replace(/\n/g, '<br>');
+
+  preview.innerHTML = formatted;
 }

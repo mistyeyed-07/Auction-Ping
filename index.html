@@ -7,13 +7,13 @@
   <link href="style.css" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 p-6 text-gray-900">
+<body class="bg-gray-100 dark:bg-gray-900 p-6 text-gray-900 dark:text-gray-100">
   <div class="max-w-3xl mx-auto">
     <h1 class="text-3xl font-bold mb-4 text-center">Auction Ping Generator</h1>
     
-    <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md mb-6 transition-all">
       <form id="cardForm" class="grid gap-4 sm:grid-cols-2">
-        <select id="rarity" class="border p-2 rounded" required>
+        <select id="rarity" class="border p-2 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
           <option value="">Select Rarity</option>
           <option>UR</option>
           <option>SSR</option>
@@ -21,27 +21,41 @@
           <option>R</option>
           <option>C</option>
         </select>
-        <input type="text" id="name" placeholder="Card Name" class="border p-2 rounded" required />
-        <input type="text" id="version" placeholder="Version (e.g. V7)" class="border p-2 rounded" required />
-        <select id="event" class="border p-2 rounded">
+        <input type="text" id="name" placeholder="Card Name" class="border p-2 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
+        <input type="text" id="version" placeholder="Version (e.g. V7)" class="border p-2 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
+        <select id="event" class="border p-2 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
           <option value="">Select Event</option>
-          <option>Halloween</option>
-          <option>Christmas</option>
-          <option>Maid</option>
+          <option>Halloween🎃</option>
+          <option>Christmas🎄</option>
+          <option>Maid👗</option>
         </select>
-        <input type="url" id="link" placeholder="Discord Link" class="border p-2 rounded" required />
-        <button type="submit" class="bg-blue-600 text-white p-2 rounded col-span-2">Add Card</button>
+        <input type="url" id="link" placeholder="Discord Link" class="border p-2 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
+        <button type="submit" class="bg-blue-600 text-white p-2 rounded col-span-2 transition-transform transform hover:scale-105 ">
+          Add Card
+        </button>
       </form>
     </div>
 
-    <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md mb-6 transition-all">
       <h2 class="text-xl font-semibold mb-2">Auction Text</h2>
-      <textarea id="output" class="w-full h-64 p-2 border rounded mb-4" readonly></textarea>
+      <textarea id="output" class="w-full h-64 p-2 border rounded mb-4 bg-gray-50 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white transition-all"></textarea>
       <div class="flex gap-2">
-        <button id="copyBtn" class="bg-green-600 text-white p-2 rounded">Copy to Clipboard</button>
-        <button id="clearBtn" class="bg-red-500 text-white p-2 rounded">Clear All</button>
+        <button id="copyBtn" class="bg-green-600 text-white p-2 rounded transition-transform transform hover:scale-105">
+          Copy to Clipboard
+        </button>
+        <button id="clearBtn" class="bg-red-500 text-white p-2 rounded transition-transform transform hover:scale-105">
+          Clear All
+        </button>
       </div>
     </div>
+
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md mb-6 transition-all">
+      <h2 class="text-xl font-semibold mb-2">Live Preview</h2>
+      <div id="preview" class="w-full h-64 p-2 border rounded overflow-auto 
+      bg-gray-50 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        <!-- Live preview content will appear here -->
+      </div>
+    </div>    
   </div>
 
   <script src="script.js"></script>
