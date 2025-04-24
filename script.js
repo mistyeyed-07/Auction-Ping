@@ -90,8 +90,9 @@ function updatePreview(text) {
 
   // Replace (:emote:) with actual emojis in preview only
   let formatted = text.replace(/\(:([a-zA-Z0-9_]+):\)/g, (match, name) => {
-    return emojiMap[name] || match;
+    return `(${emojiMap[name] || match})`;
   });
+  
 
   formatted = formatted
     .replace(/^__(.*?)__$/gm, '<u>$1</u>')
