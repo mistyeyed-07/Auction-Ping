@@ -9,7 +9,7 @@ let cards = [];
 const emojiMap = {
   jack_o_lantern: "🎃",
   christmas_tree: "🎄",
-  dress: "👗",
+  maidbow: "🎀",
   // Add more mappings as needed
 };
 
@@ -47,7 +47,7 @@ function getEventEmote(event) {
   switch (event) {
     case "Halloween🎃": return " **(:jack_o_lantern:)**";
     case "Christmas🎄": return " **(:christmas_tree:)**";
-    case "Maid👗"     : return " **(:dress:)**";
+    case "Maid🎀"     : return " **(:maidbow:)**";
     default: return "";
   }
 }
