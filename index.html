@@ -1,19 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth transition-all duration-500 ease-in-out">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Auction Ping Generator</title>
-  <link href="style.css" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Clash Display', 'sans-serif'],
+          },
+          colors: {
+            backdrop: 'rgba(255,255,255,0.05)',
+          },
+        },
+      },
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Clash+Display:wght@600&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 p-6 text-gray-900 dark:text-gray-100">
-  <div class="max-w-3xl mx-auto">
-    <h1 class="text-3xl font-bold mb-4 text-center">Auction Ping Generator</h1>
-    
-    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md mb-6 transition-all">
-      <form id="cardForm" class="grid gap-4 sm:grid-cols-2">
-        <select id="rarity" class="border p-2 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+<body class="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
+  <div class="max-w-4xl mx-auto px-4 py-10">
+    <header class="text-center mb-10">
+      <h1 class="text-4xl font-display font-bold tracking-tight">Auction Ping Generator</h1>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Data auto-saves — you're safe to reload or close.</p>
+    </header>
+
+    <!-- FORM CARD -->
+    <section class="backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-white/10 rounded-2xl shadow-lg p-6 mb-8 transition-all duration-300">
+      <form id="cardForm" autocomplete="off" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <select id="rarity" required class="border p-2 rounded-lg bg-white/60 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
           <option value="">Select Rarity</option>
           <option>UR</option>
           <option>SSR</option>
@@ -21,49 +41,76 @@
           <option>R</option>
           <option>C</option>
         </select>
-        <input type="text" id="name" placeholder="Card Name" class="border p-2 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
-        <input type="text" id="version" placeholder="Version (e.g. V7)" class="border p-2 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
-        <select id="event" class="border p-2 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        <input id="name" type="text" placeholder="Card Name" required class="border p-2 rounded-lg bg-white/60 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+        <input id="version" type="text" placeholder="Version (e.g. V7)" required class="border p-2 rounded-lg bg-white/60 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+        <select id="event" class="border p-2 rounded-lg bg-white/60 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
           <option value="">Select Event</option>
           <option>Halloween🎃</option>
           <option>Christmas🎄</option>
           <option>Maid🎀</option>
         </select>
-        <input type="url" id="link" placeholder="Discord Link" class="border p-2 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
-        <button type="submit" class="bg-blue-600 text-white p-2 rounded col-span-2 transition-transform transform hover:scale-105">
+        <input id="link" type="url" placeholder="Discord Link" required class="border p-2 rounded-lg bg-white/60 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+        <button type="submit" class="col-span-full bg-blue-600 text-white p-2 rounded-lg hover:scale-[1.02] active:scale-95 transition-transform">
           Add Card
         </button>
       </form>
-    </div>
+    </section>
 
-    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md mb-6 transition-all">
-      <label for="mode" class="block mb-1 font-semibold">Output Mode</label>
-      <select id="mode" class="border p-2 rounded mb-4 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+    <!-- MODE & OUTPUT -->
+    <section class="backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-white/10 rounded-2xl shadow-lg p-6 mb-8 transition-all duration-300">
+      <label for="mode" class="block mb-2 font-semibold">Output Mode</label>
+      <select id="mode" class="border p-2 rounded-lg mb-4 bg-white/60 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
         <option value="markdown">Standard Markdown</option>
         <option value="embed">Embed Style (Emo Headers)</option>
       </select>
 
-      <h2 class="text-xl font-semibold mb-2">Auction Text</h2>
-      <textarea id="output" class="w-full h-64 p-2 border rounded mb-4 bg-gray-50 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
-      <div class="flex gap-2">
-        <button id="copyBtn" class="bg-green-600 text-white p-2 rounded transition-transform transform hover:scale-105">
+      <h2 class="text-xl font-semibold mb-2">Auction Output</h2>
+      <textarea id="output" class="w-full h-64 p-3 border rounded-lg bg-white/60 dark:bg-gray-700 dark:border-gray-600 dark:text-white transition-all duration-300"></textarea>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <button id="copyBtn" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:scale-105 active:scale-95 transition-transform">
           Copy to Clipboard
         </button>
-        <button id="clearBtn" class="bg-red-500 text-white p-2 rounded transition-transform transform hover:scale-105">
+        <button id="clearBtn" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:scale-105 active:scale-95 transition-transform">
           Clear All
         </button>
       </div>
-    </div>
+    </section>
 
-    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md mb-6 transition-all">
+    <!-- LIVE PREVIEW -->
+    <section class="backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-white/10 rounded-2xl shadow-lg p-6 transition-all duration-300">
       <h2 class="text-xl font-semibold mb-2">Live Preview</h2>
-      <div id="preview" class="w-full h-64 p-2 border rounded overflow-auto 
-      bg-gray-50 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <div id="preview" class="w-full h-64 p-3 border rounded-lg overflow-auto bg-white/60 dark:bg-gray-700 dark:border-gray-600 dark:text-white text-sm leading-relaxed">
         <!-- Live preview content will appear here -->
       </div>
-    </div>    
+    </section>
   </div>
 
+ <!-- DARK MODE TOGGLE -->
+<button id="themeToggle" class="fixed top-4 right-4 bg-gray-900 text-white px-4 py-2 rounded-full shadow-lg hover:scale-110 transition-all z-50">
+  🌙 Dark
+</button>
+
+<script>
+  const toggleBtn = document.getElementById("themeToggle");
+
+  // Apply saved theme on load
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.documentElement.classList.add("dark");
+    toggleBtn.textContent = "🌞 Light";
+  } else {
+    document.documentElement.classList.remove("dark");
+    toggleBtn.textContent = "🌙 Dark";
+  }
+
+  // Toggle logic
+  toggleBtn.addEventListener("click", () => {
+    const isDark = document.documentElement.classList.toggle("dark");
+    toggleBtn.textContent = isDark ? "🌞 Light" : "🌙 Dark";
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  });
+</script>
   <script src="script.js"></script>
 </body>
 </html>
