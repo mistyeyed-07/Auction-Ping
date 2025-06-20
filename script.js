@@ -11,7 +11,7 @@ let cards = [];
 const emojiMap = {
   jack_o_lantern: "🎃",
   christmas_tree: "🎄",
-  maidbow: "🎀",
+  maidbow: "<a:maidbow:1381313481411792976>",
 };
 
 const rarityHeaders = {
@@ -90,7 +90,7 @@ function generateOutput() {
     grouped[card.rarity]?.push(entry);
   });
 
-  let result = mode === "embed" ? "`#0`\n\n" : "#0\n\n";
+  let result = mode === "embed" ? "`#0`\n\n" : "`#0`\n\n";
 
   for (const rarity of ["UR", "SSR", "SR", "R", "C"]) {
     if (grouped[rarity].length) {
