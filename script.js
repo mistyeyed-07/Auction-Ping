@@ -11,6 +11,7 @@ let cards = [];
 const emojiMap = {
   jack_o_lantern: "🎃",
   christmas_tree: "🎄",
+  beach: "🏖️",
   maidbow: "<a:maidbow:1381313481411792976>",
 };
 
@@ -114,6 +115,7 @@ function getEventEmote(event) {
     case "Halloween🎃": return " **(:jack_o_lantern:)**";
     case "Christmas🎄": return " **(:christmas_tree:)**";
     case "Maid🎀":      return " **(:maidbow:)**";
+    case "Summer🏖️":      return " **(:beach:)**";
     default: return "";
   }
 }
